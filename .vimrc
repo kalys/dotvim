@@ -119,5 +119,5 @@ call vundle#end()
 
 filetype plugin indent on     " required!
 
-colorscheme twilight
+colorscheme twilight256
 set shell=/bin/zsh
