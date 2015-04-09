@@ -73,44 +73,44 @@ call vundle#rc()
 
 " let Vundle manage Vundle
 " required!
-Bundle 'gmarik/vundle'
-Bundle 'kalys/vim-rails.git'
-Bundle 'tpope/vim-fugitive'
-Bundle 'kalys/dvimorak'
-Bundle 'jvortmann/zoom.vim'
-Bundle 'nathanaelkane/vim-indent-guides'
+Plugin 'gmarik/vundle'
+Plugin 'kalys/vim-rails.git'
+Plugin 'tpope/vim-fugitive'
+Plugin 'kalys/dvimorak'
+Plugin 'jvortmann/zoom.vim'
+Plugin 'nathanaelkane/vim-indent-guides'
 
 " Navigation
-Bundle 'kalys/nerdtree-dvorak'
-" Bundle 'git://git.wincent.com/command-t.git'
-Bundle 'kien/ctrlp.vim'
+Plugin 'kalys/nerdtree-dvorak'
+" Plugin 'git://git.wincent.com/command-t.git'
+Plugin 'kien/ctrlp.vim'
 
-Bundle 'godlygeek/tabular'
-Bundle 'ervandew/supertab'
+Plugin 'godlygeek/tabular'
+Plugin 'ervandew/supertab'
 
 " Syntax
-Bundle 'slim-template/vim-slim'
-Bundle 'tpope/vim-cucumber'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'briancollins/vim-jst'
-Bundle 'pangloss/vim-javascript'
-Bundle 'tpope/vim-markdown'
-Bundle 'rodjek/vim-puppet'
-Bundle 'avakhov/vim-yaml'
-Bundle 'vim-ruby/vim-ruby'
-Bundle 'mileszs/ack.vim'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'StanAngeloff/php.vim'
-Bundle 'jnwhiteh/vim-golang'
-Bundle 'derekwyatt/vim-scala'
+Plugin 'slim-template/vim-slim'
+Plugin 'tpope/vim-cucumber'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'briancollins/vim-jst'
+Plugin 'pangloss/vim-javascript'
+Plugin 'tpope/vim-markdown'
+Plugin 'rodjek/vim-puppet'
+Plugin 'avakhov/vim-yaml'
+Plugin 'vim-ruby/vim-ruby'
+Plugin 'mileszs/ack.vim'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'StanAngeloff/php.vim'
+Plugin 'jnwhiteh/vim-golang'
+Plugin 'derekwyatt/vim-scala'
 
 " Colorschemes
-Bundle 'wgibbs/vim-irblack'
-Bundle 'matthewtodd/vim-twilight'
+Plugin 'wgibbs/vim-irblack'
+Plugin 'matthewtodd/vim-twilight'
 
 " Arduino
-Bundle 'jplaut/vim-arduino-ino'
-Bundle 'sudar/vim-arduino-syntax'
+Plugin 'jplaut/vim-arduino-ino'
+Plugin 'sudar/vim-arduino-syntax'
 
 filetype plugin indent on     " required!
 
