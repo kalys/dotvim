@@ -68,8 +68,8 @@ let g:ctrlp_working_path_mode = 0 " don't manage working directory
 let g:ctrlp_jump_to_buffer = 0 " disable jumping to already open buffer
 let g:ctrlp_custom_ignore = '\v[\/](\.git|\.hg|\.svn|vendor|\.bundle|node_modules|target)'
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim/
+call vundle#begin()
 
 " let Vundle manage Vundle
 " required!
@@ -107,10 +107,12 @@ Plugin 'derekwyatt/vim-scala'
 " Colorschemes
 Plugin 'wgibbs/vim-irblack'
 Plugin 'matthewtodd/vim-twilight'
+Plugin 'flazz/vim-colorschemes'
 
 " Arduino
 Plugin 'jplaut/vim-arduino-ino'
 Plugin 'sudar/vim-arduino-syntax'
+call vundle#end()
 
 filetype plugin indent on     " required!
 
