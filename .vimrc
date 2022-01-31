@@ -224,6 +224,11 @@ set shell=/bin/zsh
 let g:user_emmet_install_global = 0
 autocmd FileType html,css EmmetInstall
 
+" Ack tricks
+let g:ackprg = 'ag --vimgrep'
+nmap <leader>a :Ag ""<Left>
+nmap <leader>A :Ag "\b<cword>\b"<CR>
+
 execute pathogen#infect()
 
 set exrc
