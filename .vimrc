@@ -65,11 +65,8 @@ no _ ^
 " dvimorak end
 
 nnoremap <leader>w <C-w>v<C-w>l
-nnoremap <leader>h :sp<CR>
 nnoremap <leader>m <C-w>s
 
-nnoremap <leader>c <C-i>
-nnoremap <leader>r <C-o>
 nnoremap <leader>u :Bdelete<CR>
 
 nnoremap / /\v
@@ -114,8 +111,14 @@ let g:ctrlp_jump_to_buffer = 0 " disable jumping to already open buffer
 let g:ctrlp_custom_ignore = '\v[\/](\.git|\.hg|\.svn|vendor|\.bundle|node_modules|app\/frontend\/node_modules|target|deps|_build|tmp)'
 let g:ctrlp_max_files=0
 
-set rtp+=~/.vim/bundle/Vundle.vim/
-call vundle#begin()
+" autosave
+augroup autosave
+    autocmd!
+    " autocmd BufRead * if &filetype == "" | setlocal ft=text | endif
+    autocmd FileType * autocmd TextChanged,InsertLeave <buffer> if &readonly == 0 && &buftype != "nofile" | silent write | endif
+augroup END
+
+call plug#begin()
 
 " ruby
 let ruby_operators = 1
@@ -132,89 +135,105 @@ augroup END
 let g:prettier#autoformat = 0
 " autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue Prettier
 
-" ale
-" let g:ale_linters = {
-" \   'ruby': ['ruby'],
-" \}
+" coc
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+let g:coc_global_extensions = ['coc-solargraph']
+
+" Make <CR> auto-select the first completion item and notify coc.nvim to
+" format on enter, <cr> could be remapped by other vim plugin
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
 
 
-" let Vundle manage Vundle
 " required!
-Plugin 'gmarik/vundle'
-Plugin 'tpope/vim-rails'
-Plugin 'jvortmann/zoom.vim'
-Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'thoughtbot/vim-rspec'
-Plugin 'easymotion/vim-easymotion'
+Plug 'tpope/vim-rails'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'easymotion/vim-easymotion'
 
 " Code completion
-Plugin 'ycm-core/YouCompleteMe'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Navigation
-Plugin 'kalys/nerdtree-dvorak'
-Plugin 'ctrlpviM/ctrlp.vim'
-Plugin 'rking/ag.vim'
-Plugin 'Chun-Yang/vim-action-ag'
-Plugin 'lervag/file-line'
+Plug 'kalys/nerdtree-dvorak'
+Plug 'ctrlpviM/ctrlp.vim'
+Plug 'rking/ag.vim'
+Plug 'Chun-Yang/vim-action-ag'
+Plug 'lervag/file-line'
 
-Plugin 'godlygeek/tabular'
-Plugin 'ervandew/supertab'
-Plugin 'moll/vim-bbye'
+Plug 'godlygeek/tabular'
+Plug 'moll/vim-bbye'
 
 " Git
-Plugin 'tpope/vim-fugitive'
-Plugin 'junegunn/gv.vim'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'tpope/vim-rhubarb'
+Plug 'tpope/vim-fugitive'
+Plug 'junegunn/gv.vim'
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-rhubarb'
 
 " Syntax
-Plugin 'slim-template/vim-slim'
-Plugin 'tpope/vim-cucumber'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'briancollins/vim-jst'
-Plugin 'tpope/vim-markdown'
-Plugin 'rodjek/vim-puppet'
-Plugin 'avakhov/vim-yaml'
-Plugin 'vim-ruby/vim-ruby'
-Plugin 'StanAngeloff/php.vim'
-Plugin 'derekwyatt/vim-scala'
-Plugin 'kylef/apiblueprint.vim'
-Plugin 'elixir-lang/vim-elixir'
-Plugin 'keith/rspec.vim'
-Plugin 'keith/swift.vim'
-Plugin 'tpope/vim-commentary'
-Plugin 'isRuslan/vim-es6'
-Plugin 'pangloss/vim-javascript'
-Plugin 'fatih/vim-go'
-Plugin 'mattn/emmet-vim'
-Plugin 'tpope/vim-endwise'
-Plugin 'pedrohdz/vim-yaml-folds'
+Plug 'slim-template/vim-slim'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-cucumber'
+Plug 'kchmck/vim-coffee-script'
+Plug 'briancollins/vim-jst'
+Plug 'tpope/vim-markdown'
+Plug 'rodjek/vim-puppet'
+Plug 'avakhov/vim-yaml'
+Plug 'vim-ruby/vim-ruby'
+Plug 'StanAngeloff/php.vim'
+Plug 'derekwyatt/vim-scala'
+Plug 'kylef/apiblueprint.vim'
+Plug 'elixir-lang/vim-elixir'
+Plug 'keith/rspec.vim'
+Plug 'keith/swift.vim'
+Plug 'tpope/vim-commentary'
+Plug 'isRuslan/vim-es6'
+Plug 'pangloss/vim-javascript'
+Plug 'fatih/vim-go'
+Plug 'mattn/emmet-vim'
+Plug 'pedrohdz/vim-yaml-folds'
 
 " Linters
-Plugin 'prettier/vim-prettier'
-Plugin 'ngmy/vim-rubocop'
+Plug 'ngmy/vim-rubocop'
 
 " Colorschemes
-Plugin 'wgibbs/vim-irblack'
-Plugin 'matthewtodd/vim-twilight'
-Plugin 'flazz/vim-colorschemes'
+Plug 'wgibbs/vim-irblack'
+Plug 'matthewtodd/vim-twilight'
+Plug 'flazz/vim-colorschemes'
 
 " Arduino
-Plugin 'jplaut/vim-arduino-ino'
-Plugin 'sudar/vim-arduino-syntax'
+Plug 'jplaut/vim-arduino-ino'
+Plug 'sudar/vim-arduino-syntax'
 
 " rails ecosystem
-" Plugin 'thoughtbot/vim-rspec'
-Plugin 'rlue/vim-fold-rspec'
+Plug 'thoughtbot/vim-rspec'
+Plug 'rlue/vim-fold-rspec'
 
 " JS
-Plugin 'kristijanhusak/vim-js-file-import'
+Plug 'kristijanhusak/vim-js-file-import'
 
-" experiment
-Plugin 'tyru/open-browser.vim'
-Plugin 'tyru/open-browser-github.vim'
-
-call vundle#end()
+" Initialize plugin system
+call plug#end()
 
 filetype plugin indent on     " required!
 
