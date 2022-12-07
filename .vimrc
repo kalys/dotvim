@@ -2,7 +2,7 @@ scriptencoding utf-8
 set encoding=utf-8
 
 if has("gui_running")
-  set guifont=Monaco:h14
+  set guifont=Monaco:h16
   set guioptions-=m  "remove menu bar
   set guioptions-=T
   set guioptions-=l
@@ -115,7 +115,7 @@ let g:ctrlp_max_files=0
 augroup autosave
     autocmd!
     " autocmd BufRead * if &filetype == "" | setlocal ft=text | endif
-    autocmd FileType * autocmd TextChanged,InsertLeave <buffer> if &readonly == 0 && &buftype != "nofile" | silent write | endif
+    autocmd FileType * autocmd TextChanged,InsertLeave <buffer> if &readonly == 0 && &buftype != "nofile" && &buftype != "quickfix" | silent write | endif
 augroup END
 
 call plug#begin()
@@ -165,6 +165,19 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
+" vimwiki
+let g:vimwiki_key_mappings = {
+            \ 'all_maps': 1,
+            \ 'global': 1,
+            \ 'headers': 1,
+            \ 'text_objs': 1,
+            \ 'table_format': 1,
+            \ 'table_mappings': 0,
+            \ 'lists': 1,
+            \ 'links': 1,
+            \ 'html': 1,
+            \ 'mouse': 0,
+            \ }
 
 " required!
 Plug 'tpope/vim-rails'
@@ -212,6 +225,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'fatih/vim-go'
 Plug 'mattn/emmet-vim'
 Plug 'pedrohdz/vim-yaml-folds'
+Plug 'jxnblk/vim-mdx-js'
 
 " Linters
 Plug 'ngmy/vim-rubocop'
@@ -244,7 +258,7 @@ let g:user_emmet_install_global = 0
 autocmd FileType html,css EmmetInstall
 
 " Ack tricks
-let g:ackprg = 'ag --vimgrep'
+let g:ag_prg = 'ag --vimgrep'
 nmap <leader>a :Ag ""<Left>
 nmap <leader>A :Ag "\b<cword>\b"<CR>
 
