@@ -2,7 +2,7 @@ scriptencoding utf-8
 set encoding=utf-8
 
 if has("gui_running")
-  set guifont=Monaco:h16
+  set guifont=Monaco:h14
   set guioptions-=m  "remove menu bar
   set guioptions-=T
   set guioptions-=l
@@ -80,6 +80,9 @@ nmap <leader>d :NERDTreeFind<CR>
 nmap <C-Y> <C-T>
 
 map <Leader>tt :VimwikiToggleListItem<CR>
+
+" move currunt line to the top
+nnoremap zT :execute "normal! " . (line(".") + &scrolloff) . "Gzt"<cr>
 
 " window navigation
 nmap <C-D> <C-W>h
