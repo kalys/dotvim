@@ -38,9 +38,12 @@ set virtualedit=all             " allow the cursor to go in to "invalid" places
 set cpoptions+=$     " when changing a line, don't redisplay, but put a '$' at
 set switchbuf=useopen           " reveal already opened files from the
 
+set mouse=a
+
 let g:use_default_shortcuts_for_zoom = 0 "zoom.vim plugin uses this
 
 let mapleader=","
+let maplocalleader=";"
 
 
 " dvimorak start
@@ -71,8 +74,10 @@ nnoremap <leader>u :Bdelete<CR>
 
 nnoremap / /\v
 vnoremap / /\v
+
 nmap <leader>t :CtrlP<CR>
 nmap <leader>b :CtrlPBuffer<CR>
+nmap <leader>p :CtrlPMixed<CR>
 
 nmap <leader>c :let @+ = expand("%")<CR>
 nmap <leader>n :NERDTreeClose<CR>:NERDTreeToggle<CR>
