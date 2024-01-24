@@ -152,6 +152,11 @@ let g:vimwiki_key_mappings = {
             \ 'mouse': 0,
             \ }
 
+let g:vimwiki_hl_headers = 1
+let g:vimwiki_hl_cb_checked = 2
+
+let g:vimwiki_list = [{'path': '~/vimwiki/', 'rx_todo': '\C\<\%(TODO\|DONE\|STARTED\|FIXME\|FIXED\|XXX\|WONT\)\>'}]
+
 " required!
 Plug 'tpope/vim-rails'
 Plug 'nathanaelkane/vim-indent-guides'
@@ -168,6 +173,9 @@ Plug 'lervag/file-line'
 
 Plug 'godlygeek/tabular'
 Plug 'moll/vim-bbye'
+
+" Vimviki
+Plug 'vimwiki/vimwiki'
 
 " Git
 Plug 'tpope/vim-fugitive'
