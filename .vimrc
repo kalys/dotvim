@@ -60,8 +60,8 @@ no j d
 no l n
 no L N
 no N <C-w><C-w>
-no H 8<Down>
-no T 8<Up>
+no H 6<Down>
+no T 6<Up>
 no D <C-w><C-r>
 no - $
 no _ ^
@@ -126,6 +126,7 @@ augroup autosave
     autocmd FileType * autocmd TextChanged,InsertLeave <buffer> if &readonly == 0 && &buftype != "nofile" && &buftype != "quickfix" | silent write | endif
 augroup END
 
+
 call plug#begin()
 
 " ruby
@@ -166,8 +167,6 @@ let g:vimwiki_list = [{'path': '~/vimwiki/', 'rx_todo': '\C\<\%(TODO\|DONE\|STAR
 Plug 'tpope/vim-rails'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'easymotion/vim-easymotion'
-
-" Code completion
 
 " Navigation
 Plug 'kalys/nerdtree-dvorak'
@@ -251,3 +250,26 @@ execute pathogen#infect()
 
 set exrc
 set secure
+
+packadd lsp
+
+" lsp
+" let lspOpts = #{autoHighlightDiags: v:true}
+" autocmd VimEnter * call LspOptionsSet(lspOpts)
+
+let lspServers = [#{
+  \  name: 'ruby-lsp',
+  \  filetype: ['ruby'],
+  \  path: 'ruby-lsp',
+  \  args: ['stdio']
+  \  }]
+call LspAddServer(lspServers)
+
+" GoTo code navigation.
+nmap <silent>gd :LspGotoDefinition<CR>
+nmap <silent>gy :LspGotoTypeDef<CR>
+nmap <silent>gi :LspGotoImpl<CR>
+nmap <silent>gr :LspPeekReferences<CR>
+inoremap <expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<TAB>"
+" end of lsp
